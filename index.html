@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>福島学寮〜変な寮〜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/8872f226af.js" crossorigin="anonymous"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{
+    height:100%;
+    font-family:"Noto Serif JP",serif;
+    scroll-behavior:smooth;
+    overflow:hidden;
+    background-color:black;
+  }
+  .snap-container{
+    height:100vh;
+    overflow-y:auto;
+    scroll-snap-type:y mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  section{
+    height:100vh;
+    scroll-snap-align:start;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:opacity 2s ease, transform 2s ease;
+    padding:1rem;
+    padding-bottom:5.0rem;
+    text-align:center;
+  }
+  section.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  h2{
+        justify-content:center;
+        
+  }
+
+  /* 1,3ページは黒背景・白文字 */
+  .dark{background:black;color:white;}
+  .bg-image h1{font-size:2.5rem;letter-spacing:2px;}
+  .big-text{position:relative;writing-mode: vertical-rl;
+font-size:8.0rem;font-weight:bold;letter-spacing:3px;}
+  .title{text-align:center;text-shadow: 0px 0px 10px black;}
+  /* 2ページ：背景画像＋縦書きテキスト */
+  .bg-image{
+    background:url("sample1.png") no-repeat center center/cover;
+    position:relative;
+    color:white;
+  }
+  .bg-overlay{
+    background:rgba(0,0,0,0.6);
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+  }
+  .vertical-text{
+    position:relative;
+    writing-mode: vertical-rl;
+    font-size:1rem;
+    line-height:1.8;
+    max-height:80vh;
+    padding:0.5rem;
+    text-align: left;
+    padding-bottom:3rem;
+    margin: auto;
+    text-shadow: 0px 0px 5px black;
+  }
+  /* 4ページ以降 白背景 */
+  .light{background:#eee;color:black;text-align:left;}
+  .light h2{font-size:1.2rem;margin-bottom:0.5rem;}
+  .light p{margin-bottom:1rem;}
+  .light img{
+    max-width:90%;
+    border-radius:6px;
+  }
+.big-text::before {
+  content: "";
+  position: absolute;
+  inset: -100px; /* 全面を覆う */
+  background: rgba(0, 0, 0, 1); /* 背景色 */
+  filter: blur(70px); /* 縁をぼかす */
+  z-index: -1;
+  border-radius: 10px; /* 角も丸められる */
+}
+h1.sc{
+  font-size:5rem;
+  text-align: center;
+  margin-bottom:15px;
+}
+.sc{
+font-family: "Noto Sans JP", sans-serif;
+  font-weight: 500;
+    text-align: center;
+  margin:0 auto;
+  color: #222;
+}
+img.sc{
+  display: block;
+  margin:0 auto;
+}
+.des {
+  font-family: "Noto Sans JP", sans-serif;
+  align-items: flex-start;
+  background: #eee;
+  color: #222;
+}
+.des h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: #222;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.7em;
+}
+.des h1::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 7px;
+  background: #ccc;
+  border-radius: 10px;
+  margin: 0.2em auto 0 auto;
+}
+.des p{
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #222;
+  text-align: center;
+}
+.des ol {
+  padding-top: 10px;
+  padding-bottom :40px;
+  list-style-type: disc;
+  padding-left: 60px;
+  font-size: 1.5rem;
+  color: #222;
+  text-align: center;
+  display: inline-block;
+}
+.des ol>ol  {
+  padding:0px;
+  list-style-type: circle;
+  padding-left: 10px;
+}
+.des li {
+  text-align: left;
+  margin: 0 auto 0.5em auto;
+  max-width: 20em;
+}
+.des img {
+  display: block;
+  margin: 20px auto 0 auto;
+  max-width: 80%;
+  height: auto;
+}
+  /* タブレット/PC向けに少し拡大 */
+  /* @media(min-width:650px){
+    .snap-container {
+    min-height: 100vh;
+    padding: 0 2vw;
+  }
+  .des h1 {
+    font-size: 2.8rem;
+    padding-bottom: 1em;
+  }
+  .des h1::after {
+    width: 40%;
+    height: 10px;
+    margin-top: 1em;
+  }
+  .des ol {
+    font-size: 2rem;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  .des li {
+    max-width: 30em;
+    font-size: 1.2em;
+  }
+  .sns-link {
+    font-size: 2.8em;
+    padding: 0.5em 1.2em;
+  }
+  } */
+  @media (min-width: 650px) {
+  .snap-container,
+  .des {
+    width: 650px;
+    margin: 0 auto;
+  }
+}
+  /* @media (min-width: 650px) {
+  .snap-container {
+    width: 650px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .bg-image h1,
+  .vertical-text,
+  .des h1,
+  .des ol,
+  .des li,
+  .sns-link {
+    font-size: inherit;
+  }
+  .des img {
+    max-width: 100%;
+    height: auto;
+  }
+} */
+.scroll {
+  padding-top: 60px;
+  position: relative;
+  text-align: center;
+}
+/* 矢印のアニメーション部分 */
+.scroll::before {
+  animation: scroll 2s infinite;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  content: "";
+  height: 20px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+}
+.scroll2{
+  margin-top:200px;
+  padding-top: 60px;
+  position: relative;
+  text-align: center;
+}
+/* 矢印のアニメーション部分 */
+.scroll2::before {
+  animation: scroll 2s infinite;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+  content: "";
+  height: 20px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+}
+
+/* 矢印のアニメーション */
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(-20px, 20px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.sns-link {
+  display: block;
+  text-align: center;
+  font-size: 2.0rem;
+  color: #222;
+  text-decoration: none;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  background: none;
+  border: none;
+}
+.sns-link:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="snap-container">
+
+  <!-- 1ページ目 -->
+  <section class="bg-image">
+    <div class="bg-overlay"></div>
+    <h1 class="title" style=" position:relative;color:#fff">福島学寮<br>〜変な寮〜</h1>
+    <br> 
+    <div class="scroll2">
+      <span>スクロール</span>
+    </div>
+
+  </section>
+
+  <!-- 2ページ目 背景画像 -->
+  <section class="bg-image">
+    <div class="bg-overlay"></div>
+    <div class="vertical-text">
+      <p>あなたはこの家の異常さが分かるだろうか。おそらく、一見しただけでは、ごくありふれた民家に見えるだろう。しかし、注意深くすみずみまで見ると、家中そこかしこに、奇妙な違和感が存在していることに気づく。その違和感が重なり、やがて一つの「事実」に結びつく。</p><p>それはあまりに恐ろしく、決して信じたくない事実である。</p>
+    </div>
+  </section>
+
+  <!-- 3ページ目 -->
+  <section class="bg-image">
+        <div class="bg-overlay"></div>
+
+    <div class="zoom-box big-text">突貫工事</div>
+  </section>
+
+  <!-- 4ページ目 -->
+  <section class="light">
+    <div>
+      <h1 class="sc">実際は</h2>
+      <h2 class="sc"><span style="color:hwb(216 0% 20%)">築浅</span>で<span style="color:hwb(216 0% 20%)">綺麗</span>で過ごしやすい男子寮です！</h2>
+      <h2 class="sc">寮生間の仲も良く、寮食も<span style="color:hwb(39 0% 20%)">美味しい！</span><br>居心地も<span style="color:hwb(39 0% 20%)">最高です！</span></p>
+      <img class="sc" src="sample2.jpg" alt="寮の内部写真">
+        <div class="scroll">
+  <span>Scroll</span>
+    </div>
+    </div>
+  </section>
+<section class="light des">
+<div>
+  <h1>立地・アクセス</h1>
+  <ol>
+    <li>教養棟まで自転車<span class="highlight">15分</span></li>
+    <li>コンビニまで徒歩<span class="highlight">5分</span></li>
+    <li>新川駅まで徒歩<span class="highlight">13分</span></li>
+    <li>裏にエルムの森公園あり</li>
+  </ol>
+  <img class="map-img"style=""src="map.png" alt="寮の地図">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>建物・設備</h1>
+  <ol style="padding-left:80px">
+    <li>建物が<span class="highlight">新しい！</span></li>
+    <li>全部屋 Wi-Fi完備</li>
+    <li>共用の生活家電あり</li>
+    <li>新生活用品ほぼ不要！</li>
+  </ol>
+  <img src="appoint.png" alt="部屋・洗濯機・冷蔵庫・リビングの写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>寮母・寮食</h1>
+  <ol style="padding-left:50px">
+    <li style="margin-bottom:0">優しい寮母さんが平日常駐</li>
+    <li style="margin-left:0.5em; list-style-type: circle; padding-bottom:5px;">大人に相談できる環境</li>
+    <li style="margin-bottom:0">平日朝晩、寮食付き</li>
+    <li style="margin-left:0.5em; list-style-type: circle;">栄養バランスの良い食事</li>
+  </ol>
+  <img src="meal.jpg" alt="寮食の写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>寮費の安さ</h1>
+  <ol>
+    <li>公益費・食費込みで安価</li>
+    <li>月々約45,000円<br>&emsp;(2024年度平均実績)</li>
+  </ol>
+  <img src="money.jpg" alt="日常写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>コミュニティ</h1>
+  <ol>
+    <li>寮生同士の距離が近い</li>
+    <li>先輩・後輩のつながり</li>
+    <li>情報交換・助け合いが盛ん</li>
+  </ol>
+  <img src="komyu.jpg" alt="飲み会の写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>共同生活の楽しさ</h1>
+  <ol>
+    <li>キッチン・リビングを共有</li>
+    <li>自然に交流が生まれる</li>
+    <li>イベントも盛り沢山</li>
+  </ol>
+  <img src="event.jpg" alt="イベント写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>自由度の高さ</h1>
+  <ol>
+    <li>門限なし・厳格な規則無し</li>
+    <li>プライバシーも確保</li>
+    <li>自分らしい生活スタイル</li>
+  </ol>
+  <img src="kyoudo.jpg" alt="寮の地図">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>歴史と伝統</h1>
+  <ol>
+    <li>1932年に初代学寮建設</li>
+    <li>前身は「会津学寮」</li>
+    <li>福島県との深いつながり</li>
+  </ol>
+  <img src="old.jpg" alt="昔の寮の写真">
+  </div>
+</section>
+<section class="light des">
+<div>
+  <h1>見学・入寮希望の方</h1>
+    <p>見学希望の方はこちらから</p>
+  <!--twitterリンク-->
+<div class="sns-links">
+  <a href="https://twitter.com/fukushimagak" target="_blank" class="sns-link">
+    <i class="fa-brands fa-twitter"></i><span>Twitter</span>
+  </a>
+  <a href="https://fukushimagakuryo.wixsite.com/fukushimagakuryo/blank-6" target="_blank" class="sns-link">
+    <i class="fa-solid fa-house"></i><span>公式HP</span>
+  </a>
+    <img src="out.jpg" alt="寮の外観">
+
+</div>
+<!--HPリンク-->
+
+  </div>
+</section>
+</div>
+
+<script>
+  // スクロール時にフェードイン
+  const sections = document.querySelectorAll("section");
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {threshold:0.4});
+  sections.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
